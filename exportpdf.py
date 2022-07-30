@@ -71,12 +71,9 @@ def makePdfSong(songNumber, rest_of_params):
     """
 
     try:
-        print("before===================================")
         #extract the rest of the param
         params = extractOptionalParams(rest_of_params)
-        print()
-        print(params)
-        print()
+
         #then download desired song
         downloadedSong = downloadSong(songNumber)
 
@@ -165,8 +162,7 @@ def downloadSong(songNumber):
 
     params = {"id" : songNumber}
     
-    
-    
     result = client.execute(query, variable_values=params)
+    
     return result['song_lyric']
 

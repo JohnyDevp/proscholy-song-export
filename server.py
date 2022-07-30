@@ -39,7 +39,7 @@ def download_doc():
         Either file with documentation or string describing error.
     """
     try:
-        send_file('readme.pdf', as_attachment=True)
+        return send_file('readme.pdf', as_attachment=True)
     except Exception as e:
         print(e)
         return "An error occured!"

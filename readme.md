@@ -6,6 +6,13 @@ Autor
 Jan Holáň, 2022 <br>
 Under Creative Commons Licence
  
+Files
+---
+- readme.md - short documentation
+- server.py - flask server handling requests
+- exportpdf.py - module handling all export tasks
+- props.py - module consisting of helper objects
+
 Usage
 ---
 Song can be exported at link /export_song with parameters:
