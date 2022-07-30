@@ -10,8 +10,14 @@ import exportpdf
 app = Flask(__name__)
 
 #define a route for downloading a pdf file, 
-@app.route('/download_pdf', methods=['GET'])
-def download_pdf():
+@app.route('/export_song', methods=['GET'])
+def export_song():
+    """function for exporting desired song
+
+    Returns:
+        file : exported song
+        In case of exception it returns a warning
+    """
     try:
         #get all parameters from the url
         #this is the only one required param
@@ -22,11 +28,31 @@ def download_pdf():
         #return proper pdf
         return send_file(songName,as_attachment=True)
     except Exception as e:
-        return "An error occured: " + str(e) 
+        print(e)
+        return "An error occured"
+
+@app.route('/doc')
+def download_doc():
+    """function for handling showing the documentation for this API
+
+    Returns:
+        Either file with documentation or string describing error.
+    """
+    try:
+        send_file('readme.pdf', as_attachment=True)
+    except Exception as e:
+        print(e)
+        return "An error occured!"
 
 @app.route('/')
 def home():
+    """function for main window
+
+    Returns:
+        html: content shortly describes this API
+    """    
     return  """
-                <h2>HELLO TO PROSCHOLY PDF EXPORT</h2>
-                <h4>for use go to /download_pdf with sufficient params</h4>
+                <h2>WELCOME TO PROSCHOLY PDF EXPORT</h2>
+                <h4>for use of this API go to /export_song with sufficient params</h4>
+                <h4>for more info read the <a href="/doc">doc</a>
             """

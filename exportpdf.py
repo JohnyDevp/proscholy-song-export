@@ -49,11 +49,12 @@ class Song:
         Returns:
             string : file name with its extension
         """
-        if self.params['outformat'] == 'pdf' : 
-            self.finalSongString = self.songText
+        if self.params['fileformat'] == 'pdf' : 
+            #TODO handle parameters
+            self.finalSongString = self.songText 
             pdfkit.from_string(HTML_HEAD + self.finalSongString + HTML_FOOT, self.songName+".pdf")
             return self.songName + ".pdf"
-        elif self.params['outformat'] == 'ppt' : 
+        elif self.params['fileformat'] == 'ppt' : 
             return self.songName + ".ppt"
     
     
@@ -97,8 +98,8 @@ def extractOptionalParams(rest_of_params):
     """extract the rest of the params, possible params are: \n
     resx - for X component of resolution of the output screen \n
     resy - for Y component of resolution of the output screen \n
-    outformat - either pdf or ppt \n
-    songformat - consisting of numbers, B (bridge), R (refren) - how the text should go \n
+    fileformat - either pdf or ppt \n
+    songformat - consisting of numbers, B (bridge), R, C (chorus) - how the text should go \n
 
     Args:
         rest_of_params (__dict__): array of params
@@ -111,7 +112,7 @@ def extractOptionalParams(rest_of_params):
     #set up default params for every possible params
     resX = 0
     resY = 0
-    outFormat = 'pdf'
+    fileFormat = 'pdf'
     songFormat = 0
 
     #check whether params were set and check for their correctness
@@ -119,16 +120,16 @@ def extractOptionalParams(rest_of_params):
         if str(rest_of_params['resx']).isnumeric() : resX = rest_of_params['resx']
     if 'resx' in rest_of_params : 
         if str(rest_of_params['resy']).isnumeric() : resY = rest_of_params['resy']
-    if 'outformat' in rest_of_params : 
-        if str(rest_of_params['outformat']) in ['pdf', 'ppt'] : outFormat = rest_of_params['outformat']
+    if 'fileformat' in rest_of_params : 
+        if str(rest_of_params['fileformat']) in ['pdf', 'ppt'] : fileFormat = rest_of_params['fileformat']
     if 'songformat' in rest_of_params :
-        pattern = re.compile("[0-9BbRr]+")
+        pattern = re.compile("[0-9BbRrCc]+")
         if pattern.fullmatch(str(rest_of_params['songformat'])) : songFormat = rest_of_params['songformat']
     
     retArray = {
         "resx" : resX,
         "resy" : resY,
-        "outformat" : outFormat,
+        "fileformat" : fileFormat,
         "songformat" : songFormat
     }
 
