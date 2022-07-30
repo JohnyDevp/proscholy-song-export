@@ -2,7 +2,6 @@
 from flask import Flask
 from flask import send_file
 
-
 if __name__ == "__name__":
     #start server flask
     app = Flask(__name__)
