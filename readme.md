@@ -13,7 +13,18 @@ Files
 - exportpdf.py - module handling all export tasks
 - props.py - module consisting of helper objects
 
-Usage
+Run
+---
+In bash:
+<pre>
+$ export FLASK_APP=server
+$ flask run
+</pre>
+
+Then go to the IP address and port which has been written out in terminal (usually 127.0.0.1:5000). For detailed usage continue
+below.
+
+Description of usage
 ---
 Song can be exported at link /export_song with parameters:
 - songnumber ... the only REQUIRED parameter - song id in database
