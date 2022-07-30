@@ -26,7 +26,7 @@ below.
 
 Description of usage
 ---
-Song can be exported at link /export_song with parameters:
+Song can be exported at link <pre>/export_song</pre> with parameters:
 - songnumber ... the only REQUIRED parameter - song id in database
 (The rest of parameters are optional and so has its own default value if not set)
 - resx ... X component of resolution of desired output
