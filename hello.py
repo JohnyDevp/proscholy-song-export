@@ -1,28 +1,20 @@
 #for making a graphql request and further result get
-from token import EXACT_TOKEN_TYPES
-from warnings import catch_warnings
-from attr import define
 from gql import gql, Client
 from gql.transport.aiohttp import AIOHTTPTransport
 
-#for converting given graphql result into text
-import json
 
 #for converting json into pdf
 import jpype
-import asposecells
 jpype.startJVM() 
-from asposecells.api import Workbook
 import pdfkit
-import requests
 
-#for running a server
-from flask import Flask
-from flask import send_file
 
 #path for sending  graphql requests
 PROSCHOLY_PATH = "https://zpevnik.proscholy.cz/graphql"
 
+class Connection:
+    def __init__(self):
+        ()
 
 if __name__ == "__main__":
     print("ProScholy.cz song pdf converter")
@@ -60,7 +52,7 @@ if __name__ == "__main__":
                 <meta charset="utf-8">
             </head>
             <body> """       
-
+    
     html_content_end = """
         </body>
         </html>
