@@ -44,5 +44,5 @@ Example
 
 Exceptions
 ---
-When any exception occurse it appears usually in web browser, sometimes also the description of it is shown in terminal on server. <br>
+When any exception occurs warning appears usually in web browser, sometimes also the description of it is shown in terminal on server. <br>
 Mistakes or errors considering parameters are left without any warning.
