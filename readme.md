@@ -42,7 +42,7 @@ Example
 - 127.0.0.1:5000/export_song?songnumber=7&resx=1920&resy=1080&fileformat=pdf&songformat=12BR
 </pre>
 
-Operating system differents
+Operating system differences
 ---
 Both platforms requires all neccessary packages to be installed, so make yourself sure that this is done. (if you start the app, it will show you what package is currently missing - you will probably have to do this start-install process more times) <br>
 If you are on:
