@@ -24,7 +24,8 @@ def export_song():
         songNumber = request.args.get("songnumber")
         
         songName = exportpdf.makePdfSong(songNumber, request.args)
-
+        print(songName)
+        print("===================")
         #return proper pdf
         return send_file(songName,as_attachment=True)
     except Exception as e:

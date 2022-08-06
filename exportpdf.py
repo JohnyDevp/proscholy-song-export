@@ -3,7 +3,6 @@ from distutils.command.build import build
 from gql import gql, Client
 from gql.transport.aiohttp import AIOHTTPTransport
 
-
 #for converting json into pdf
 import jpype
 jpype.startJVM() 
@@ -14,6 +13,10 @@ import re
 
 #my module for color for string
 from props import bcolors
+
+#FOR WINDOWS======================================================
+path_wkhtmltopdf = r"C:\\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"
+config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
 
 #constants
 PROSCHOLY_PATH = "https://zpevnik.proscholy.cz/graphql"
@@ -92,13 +95,16 @@ class Song:
         Returns:
             string : file name with its extension
         """
-
+        
         # handle the song format - how the verses should go
         self.__putSongInOrder()
-
+        
         # handle the file format
         if self.params['fileformat'] == 'pdf' : 
-            pdfkit.from_string(HTML_HEAD + self.finalSongString + HTML_FOOT, self.songName+".pdf")
+            #FOR LINUX=======================
+            #pdfkit.from_string(HTML_HEAD + self.finalSongString + HTML_FOOT, self.songName+".pdf")
+            #FOR WINDOWS
+            pdfkit.from_string(HTML_HEAD + self.finalSongString + HTML_FOOT, self.songName+".pdf", configuration=config)
             return self.songName + ".pdf"
         elif self.params['fileformat'] == 'ppt' : 
             return self.songName + ".ppt"
