@@ -15,10 +15,14 @@ Files
 
 Run
 ---
-In bash:
+In bash on Linux:
 <pre>
 $ export FLASK_APP=server
 $ flask run
+</pre>
+In PowerShell on Windows:
+<pre>
+> flask --app server run 
 </pre>
 
 Then go to the IP address and port which has been written out in terminal (usually 127.0.0.1:5000). For detailed usage continue
