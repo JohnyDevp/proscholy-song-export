@@ -14,6 +14,9 @@ import re
 #my module for color for string
 from props import bcolors
 
+#for exporting data to json file
+import json
+
 #FOR WINDOWS======================================================
 # path_wkhtmltopdf = r"C:\\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"
 # config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
@@ -96,6 +99,16 @@ class Song:
             string : file name with its extension
         """
         
+        #create json model
+        song_data = { 
+            "data" : {
+                "song-name" : self.songName,
+                "song-number" : 50,
+                "num-of-slides" : 40,
+                "export-format" : self.params['fileformat']
+            },
+            "slides" : []
+        }
         # handle the song format - how the verses should go
         self.__putSongInOrder()
         
@@ -147,6 +160,7 @@ def extractOptionalParams(rest_of_params):
     resy - for Y component of resolution of the output screen \n
     fileformat - either pdf or ppt \n
     songformat - consisting of numbers, B (bridge), R, C (chorus) - how the text should go \n
+    songnumber
 
     Args:
         rest_of_params (__dict__): array of params
@@ -177,7 +191,8 @@ def extractOptionalParams(rest_of_params):
         "resx" : resX,
         "resy" : resY,
         "fileformat" : fileFormat,
-        "songformat" : songFormat
+        "songformat" : songFormat,
+        "songnumber" : rest_of_params['songnumber']
     }
 
     #return the prepared array
