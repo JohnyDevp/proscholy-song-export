@@ -5,7 +5,6 @@ from flask import request
 
 #get classes and properties for preparation of pdf
 import exportpdf
-
 #start server flask
 app = Flask(__name__)
 

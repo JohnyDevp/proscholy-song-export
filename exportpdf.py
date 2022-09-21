@@ -70,7 +70,7 @@ class Song:
         versesNumbers = re.findall("[0-9]+[:.]|[R][:.]|[C][:.]|[B][:.]", self.songText)
 
         # go through the string representing the desired song format (i.e. verses order)
-        buildedSong = "" # here will be build the final form of the song
+        buildedSong = "" # here will be builded the final form of the song
         for part in self.params['songformat']:
             try:
                 for i in versesNumbers: # find the desired part in existing parts found in song
@@ -86,8 +86,8 @@ class Song:
         # load the builded song into the variable for the final representation
         self.finalSongString = buildedSong
 
-    def export(self) :
-        """method generating new file with song text with all requirements
+    def exportJson(self) :
+        """method generating json file with text and display options
 
         Returns:
             string : file name with its extension
@@ -98,6 +98,7 @@ class Song:
 
         # handle the file format
         if self.params['fileformat'] == 'pdf' : 
+            
             pdfkit.from_string(HTML_HEAD + self.finalSongString + HTML_FOOT, self.songName+".pdf")
             return self.songName + ".pdf"
         elif self.params['fileformat'] == 'ppt' : 
