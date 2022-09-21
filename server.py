@@ -10,8 +10,8 @@ from src import core
 app = Flask(__name__)
 
 #define a route for downloading a pdf file, 
-@app.route('/export_song', methods=['GET'])
-def export_song():
+@app.route('/export_song_json', methods=['GET'])
+def export_song_json():
     """function for exporting desired song
 
     Returns:
@@ -23,14 +23,8 @@ def export_song():
         #this is the only one required param
         songNumber = request.args.get("songnumber")
         
-<<<<<<< HEAD
         songName = core.makePdfSong(songNumber, request.args)
 
-=======
-        songName = exportpdf.makePdfSong(songNumber, request.args)
-        print(songName)
-        print("===================")
->>>>>>> origin/main
         #return proper pdf
         return send_file(songName,as_attachment=True)
     except Exception as e:
@@ -38,7 +32,7 @@ def export_song():
         return "An error occured"
 
 @app.route('/doc')
-def download_doc():
+def doc():
     """function for handling showing the documentation for this API
 
     Returns:
