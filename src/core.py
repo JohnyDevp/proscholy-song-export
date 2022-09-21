@@ -15,8 +15,8 @@ import re
 from props import bcolors
 
 #FOR WINDOWS======================================================
-path_wkhtmltopdf = r"C:\\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"
-config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+# path_wkhtmltopdf = r"C:\\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"
+# config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
 
 #constants
 PROSCHOLY_PATH = "https://zpevnik.proscholy.cz/graphql"
@@ -101,15 +101,8 @@ class Song:
         
         # handle the file format
         if self.params['fileformat'] == 'pdf' : 
-<<<<<<< HEAD:src/core.py
             
             pdfkit.from_string(HTML_HEAD + self.finalSongString + HTML_FOOT, self.songName+".pdf")
-=======
-            #FOR LINUX=======================
-            #pdfkit.from_string(HTML_HEAD + self.finalSongString + HTML_FOOT, self.songName+".pdf")
-            #FOR WINDOWS
-            pdfkit.from_string(HTML_HEAD + self.finalSongString + HTML_FOOT, self.songName+".pdf", configuration=config)
->>>>>>> origin/main:exportpdf.py
             return self.songName + ".pdf"
         elif self.params['fileformat'] == 'ppt' : 
             return self.songName + ".ppt"
