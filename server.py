@@ -4,7 +4,8 @@ from flask import send_file
 from flask import request
 
 #get classes and properties for preparation of pdf
-import exportpdf
+from src import core
+
 #start server flask
 app = Flask(__name__)
 
@@ -22,7 +23,7 @@ def export_song():
         #this is the only one required param
         songNumber = request.args.get("songnumber")
         
-        songName = exportpdf.makePdfSong(songNumber, request.args)
+        songName = core.makePdfSong(songNumber, request.args)
 
         #return proper pdf
         return send_file(songName,as_attachment=True)
@@ -38,7 +39,7 @@ def download_doc():
         Either file with documentation or string describing error.
     """
     try:
-        return send_file('readme.pdf', as_attachment=True)
+        return send_file('/doc/readme.pdf', as_attachment=True)
     except Exception as e:
         print(e)
         return "An error occured!"
