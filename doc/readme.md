@@ -15,10 +15,14 @@ Files
 
 Run
 ---
-In bash:
+In bash on Linux:
 <pre>
 $ export FLASK_APP=server
 $ flask run
+</pre>
+In PowerShell on Windows:
+<pre>
+> flask --app server run 
 </pre>
 
 Then go to the IP address and port which has been written out in terminal (usually 127.0.0.1:5000). For detailed usage continue
@@ -41,6 +45,13 @@ Example
 - 127.0.0.1:5000/export_song?songnumber=3 (only one parameter - the required one, specifying which song to download)
 - 127.0.0.1:5000/export_song?songnumber=7&resx=1920&resy=1080&fileformat=pdf&songformat=12BR
 </pre>
+
+Operating system differences
+---
+Both platforms requires all neccessary packages to be installed, so make yourself sure that this is done. (if you start the app, it will show you what package is currently missing - you will probably have to do this start-install process more times) <br>
+If you are on:
+- Windows - find every comment <b>WINDOWS</b>, uncomment the next lines, which are marked and comment each block of code marked with word <b>LINUX</b>. Make sure that every line you uncomment make sense considering your personal PC setup (especially paths).
+- Linux - change words <b>WINDOWS</b> and <b>LINUX</b> and do the steps written above
 
 Exceptions
 ---
