@@ -23,7 +23,7 @@ def export_song_json():
         #this is the only one required param
         songNumber = request.args.get("songnumber")
         
-        songName = core.makePdfSong(songNumber, request.args)
+        songName = core.exportSongToJson(songNumber, request.args)
 
         #return proper pdf
         return send_file(songName,as_attachment=True)
