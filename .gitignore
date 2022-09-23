@@ -1,2 +1,4 @@
 # ignore testing file
+*.json
+*.txt
 test.py
