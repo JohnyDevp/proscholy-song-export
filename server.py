@@ -1,12 +1,16 @@
-#for running a server
+# for running a server
 from flask import Flask
 from flask import send_file
 from flask import request
+import requests
 
-#get classes and properties for preparation of pdf
+# get classes and properties for preparation of pdf
 from src import core
 
-#start server flask
+# const for url address of server for the second flask app
+url_of_second_api = ""
+
+# start server flask
 app = Flask(__name__)
 
 #define a route for downloading a pdf file, 
@@ -25,8 +29,9 @@ def export_song_json():
         
         songName = core.exportSongToJson(songNumber, request.args)
 
-        #return proper pdf
+        # send json file to the api for format it as required file (pdf or ppt)
         return send_file(songName,as_attachment=True)
+        
     except Exception as e:
         print(e)
         return "An error occured. Song probably doesnt exist or parameters were set wrongly."
