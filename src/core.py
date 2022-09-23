@@ -5,7 +5,6 @@ from gql.transport.aiohttp import AIOHTTPTransport
 #for converting json into pdf
 import jpype
 jpype.startJVM() 
-import pdfkit
 
 #regex
 import re
@@ -51,10 +50,11 @@ def exportSongToJson(songNumber, rest_of_params):
         songObject = Song(downloadedSongText, downloadedSongName, params)
 
         #create proper output file, get its name and return it
-        return songObject.export()
+        return songObject.exportJson()
         
     except Exception as e:
         print(bcolors.WARNING + "An error occured: " + str(e) + bcolors.ENDC)
+        print(bcolors.FAIL + "Song may not exist" + bcolors.ENDC)
         return False
 
 def extractOptionalParams(rest_of_params):

@@ -58,10 +58,14 @@ import json
 # with open("song-data.json", "w") as file:
 #     file.write(json.dumps(song))
 
-buildedsong = [
-    [ "2", "verse text"],
-    ["1", "verse text"]
-]
-buildedsong.append(["B.:", "bridge text"])
+# buildedsong = [
+#     [ "2", "verse text"],
+#     ["1", "verse text"]
+# ]
+# buildedsong.append(["B.:", "bridge text"])
 
-print(buildedsong)
+# print(buildedsong)
+
+with open("test.json", "r") as file:
+    string = json.loads(file.read())
+    open("out.txt", "w").write(str(string))

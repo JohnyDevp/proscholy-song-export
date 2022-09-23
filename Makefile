@@ -1,3 +1,6 @@
+run:
+	export PYTHONPATH="/home/johnny/code_repo/proScholy/proscholy-song-export/src:/home/johnny/code_repo/proScholy/proscholy-song-export"
+
 cleanpdf:
 	rm -f *.pdf
 
