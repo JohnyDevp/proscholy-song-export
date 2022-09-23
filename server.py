@@ -29,7 +29,7 @@ def export_song_json():
         return send_file(songName,as_attachment=True)
     except Exception as e:
         print(e)
-        return "An error occured"
+        return "An error occured. Song probably doesnt exist or parameters were set wrongly."
 
 @app.route('/doc')
 def doc():
