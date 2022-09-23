@@ -41,20 +41,27 @@
 # else : print("ney")
 
 import json
-number = 40
-song = { 
-    "song data" : {
-        "font weight" : number,
-        "song name" : "Open The Eyes",
-    },
-    "song text" : [
-        "sloka jedna", 
-        "sloka dva",
-        "sloka tri"
-    ]
-}
+# number = 40
+# song = { 
+#     "song data" : {
+#         "font weight" : number,
+#         "song name" : "Open The Eyes",
+#     },
+#     "song text" : [
+#         "sloka jedna", 
+#         "sloka dva",
+#         "sloka tri"
+#     ]
+# }
 
-song["song text"].append("ahoj")
-with open("song-data.json", "w") as file:
-    file.write(json.dumps(song))
+# song["song text"] = ['ahoj', 'jak se mas', 'ja se mam dobre']
+# with open("song-data.json", "w") as file:
+#     file.write(json.dumps(song))
 
+buildedsong = [
+    [ "2", "verse text"],
+    ["1", "verse text"]
+]
+buildedsong.append(["B.:", "bridge text"])
+
+print(buildedsong)
