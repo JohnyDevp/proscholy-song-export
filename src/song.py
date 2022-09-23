@@ -1,6 +1,6 @@
 import re
 import json
-
+from flask import jsonify
 from props import bcolors, count_lines_endings
 
 class Song:
@@ -125,9 +125,5 @@ class Song:
             "slides" : slides
         }
         
-        # write json file
-        with open(self.songName + ".json", "w") as file:
-            file.write(json.dumps(song_data, ensure_ascii=False))
-
-        # return json file name
-        return self.songName + ".json"
+        # return json data
+        return jsonify(song_data)

@@ -8,7 +8,7 @@ import requests
 from src import core
 
 # const for url address of server for the second flask app
-url_of_second_api = ""
+url_of_second_api = "http://127.0.0.1:5000/data_to_file_export"
 
 # start server flask
 app = Flask(__name__)
@@ -27,11 +27,13 @@ def export_song_json():
         #this is the only one required param
         songNumber = request.args.get("songnumber")
         
-        songName = core.exportSongToJson(songNumber, request.args)
+        song_data_json = core.exportSongToJson(songNumber, request.args)
 
         # send json file to the api for format it as required file (pdf or ppt)
-        return send_file(songName,as_attachment=True)
-        
+        requests.post(url_of_second_api, song_data_json)
+
+        return True
+
     except Exception as e:
         print(e)
         return "An error occured. Song probably doesnt exist or parameters were set wrongly."
