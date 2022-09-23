@@ -1,5 +1,5 @@
 class bcolors:
-    """ colors codes for colored writeouts to terminal 
+    """ colors codes for colored writeouts to terminal
     """
 
     HEADER = '\033[95m'

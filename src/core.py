@@ -15,8 +15,6 @@ from props import bcolors
 # song object
 from song import Song
 
-# toto je koment
-# toto je koment 2
 #FOR WINDOWS======================================================
 # path_wkhtmltopdf = r"C:\\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"
 # config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
