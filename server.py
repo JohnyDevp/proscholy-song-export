@@ -1,11 +1,17 @@
 # for running a server
+import base64
 from flask import Flask
 from flask import send_file
 from flask import request
-import requests
+from io import BytesIO
+import requests, json
 
 # get classes and properties for preparation of pdf
 from src import core
+
+
+from src import props
+from props import bcolors
 
 # const for url address of server for the second flask app
 url_of_second_api = "http://127.0.0.1:5000/data_to_file_export"
@@ -27,16 +33,28 @@ def export_song_json():
         #this is the only one required param
         songNumber = request.args.get("songnumber")
         
-        song_data_json = core.exportSongToJson(songNumber, request.args)
+        song_data_json_format = core.exportSongToJson(songNumber, request.args)
+        
+        # get the file-export format (pdf | ppt) for future possibility of decoding file received from the second API
+        song_format = song_data_json_format['data']['export-format']
+        # get song name for reason written right above
+        song_name = song_data_json_format['data']['song-name']
 
-        # send json file to the api for format it as required file (pdf or ppt)
-        requests.post(url_of_second_api, song_data_json)
-
-        return True
+        # send json file to the api to format the song as required (pdf or ppt)
+        # res will handle the content of the exported file
+        res = requests.post(url_of_second_api, json=json.dumps(song_data_json_format))
+        if res.ok:
+            # straight write received bytes (from res) to a file according to an extension
+            with open(song_name+song_format, 'wb') as f:
+                f.write(res.content)
+            
+            return send_file(song_name+song_format, as_attachment=True)
+        else:
+            raise Exception
 
     except Exception as e:
         print(e)
-        return "An error occured. Song probably doesnt exist or parameters were set wrongly."
+        return "An error occured. Song probably doesnt exist, parameters were set wrongly or there's an internal server error."
 
 @app.route('/doc')
 def doc():

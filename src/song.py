@@ -126,4 +126,4 @@ class Song:
         }
         
         # return json data
-        return jsonify(song_data)
+        return song_data
