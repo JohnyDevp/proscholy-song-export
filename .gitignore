@@ -1,4 +1,6 @@
 # ignore testing file
 *.json
 *.txt
+*.odt
+*.odp
 test.py

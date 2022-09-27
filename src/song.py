@@ -56,14 +56,15 @@ class Song:
         # load the builded song into the variable for the final representation
         return buildedSong
     
-    def buildSlidesFromBuildedSong(self, buildedSongArray):
+    def __buildSlidesFromBuildedSong(self, buildedSongArray):
         # TODO these three params have to be passed here in variable 'params'
-        desired_num_of_lines = 4
-        max_lines = 5
+        max_lines = 5 # TODO probably count count max lines from desired font size
         min_lines = 2 
-        
-        # first slide build
+
+        # here will be stored the slides in json one by one
         slides = []
+
+        # first slide build
         slides.append({            
             "song-name" : self.songName,
             "song-id" : self.params['songnumber']
@@ -92,6 +93,14 @@ class Song:
                         currently_written_lines_on_slide = 1
                         # write currently processed verse line to the
                         current_slide_verse = line.strip() + "\n"
+
+                # in case the last slide hasn't been written
+                if currently_written_lines_on_slide != 0:
+                    # write out current slide
+                    slides.append({
+                        "verse-sign" : verse[0],
+                        "lyrics" : current_slide_verse
+                    })
             else:
                 # otherwise just create new slide with the text
                 slides.append({
@@ -112,7 +121,7 @@ class Song:
         buildedSongArray = self.__putSongInOrder()
         
         # build slides from builded song text
-        slides = self.buildSlidesFromBuildedSong(buildedSongArray)
+        slides = self.__buildSlidesFromBuildedSong(buildedSongArray)
 
         #create json model
         song_data = { 
