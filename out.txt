@@ -1,0 +1,1 @@
+{'data': {'song-name': 'Dary (Z mnoha zrn)', 'song-id': '408', 'num-of-slides': 2, 'export-format': 'pdf'}, 'slides': [{'song-name': 'Dary (Z mnoha zrn)', 'song-id': '408'}, {'verse-sign': '1.', 'lyrics': 'Z mnoha zrn se stal jeden chléb,\nco naši duši z prachu povýší,\nnaplní radostí, pokojem,\nk životu v nebi nás přiblíží.'}]}
