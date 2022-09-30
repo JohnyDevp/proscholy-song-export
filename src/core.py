@@ -58,11 +58,13 @@ def exportSongToJson(songNumber, rest_of_params):
 
 def extractOptionalParams(rest_of_params):
     """extract the rest of the params, possible params are: \n
-    resx - for X component of resolution of the output screen \n
-    resy - for Y component of resolution of the output screen \n
-    fileformat - either pdf or ppt \n
+    fontfamily - font family to use in presentation\n
+    fontsize - font size to use in presentation\n
+    background - url of image or color - both for presentation background\n
+    maxlines - maximum lines per slide\n
+    fileformat - either pdf or ppt or rawpdf\n
     songformat - consisting of numbers, B (bridge), R, C (chorus) - how the text should go \n
-    songnumber
+    songnumber - id of song from zpevnik database
 
     Args:
         rest_of_params (__dict__): array of params
@@ -72,26 +74,34 @@ def extractOptionalParams(rest_of_params):
 
     """
 
-    #set up default params for every possible params
-    resX = 0
-    resY = 0
-    fileFormat = 'pdf'
+    #set up default values for every possible params
+    fileFormat = 'ppt'
     songFormat = 0
-    
+    maxLines = 5
+    fontFamily = 'arial'
+    fontSize = 12
+    background = "white"
+
     #check whether params were set and check for their correctness
-    if 'resx' in rest_of_params : 
-        if str(rest_of_params['resx']).isnumeric() : resX = rest_of_params['resx']
-    if 'resx' in rest_of_params : 
-        if str(rest_of_params['resy']).isnumeric() : resY = rest_of_params['resy']
+    if 'fontfamily' in rest_of_params : 
+        if str(rest_of_params['fontfamily']).lower() in ['arial', 'times', 'opensans'] : fontFamily = rest_of_params['fontfamily']
+    if 'fontsize' in rest_of_params : 
+        if str(rest_of_params['fontsize']).isnumeric() : fontSize = rest_of_params['fontsize']
+    if 'background' in rest_of_params : 
+        fontSize = rest_of_params['background']
+    if 'maxlines' in rest_of_params : 
+        if str(rest_of_params['maxlines']).isnumeric() : maxLines = rest_of_params['maxlines']
     if 'fileformat' in rest_of_params : 
-        if str(rest_of_params['fileformat']) in ['pdf', 'ppt'] : fileFormat = rest_of_params['fileformat']
+        if str(rest_of_params['fileformat']) in ['pdf', 'ppt', 'rawpdf'] : fileFormat = rest_of_params['fileformat'] 
     if 'songformat' in rest_of_params :
         pattern = re.compile("[0-9BbRrCc]+")
         if pattern.fullmatch(str(rest_of_params['songformat'])) : songFormat = rest_of_params['songformat']
     
     retArray = {
-        "resx" : resX,
-        "resy" : resY,
+        "fontfamily" : fontFamily,
+        "fontsize" : fontSize,
+        "background" : background,
+        "maxlines" : maxLines,
         "fileformat" : fileFormat,
         "songformat" : songFormat,
         "songnumber" : rest_of_params['songnumber']

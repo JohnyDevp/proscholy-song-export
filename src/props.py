@@ -28,3 +28,8 @@ def count_lines_endings(text):
             new_line_counter += 1
 
     return new_line_counter
+
+def remove_exported_files():
+    import os
+    os.remove("./../*.ppt")
+    os.remove("./../*.pdf")

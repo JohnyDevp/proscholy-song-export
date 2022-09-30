@@ -8,10 +8,13 @@ Under Creative Commons Licence
  
 Files
 ---
-- readme.md - short documentation
+- doc/readme.md - short documentation
+- doc/readme.pdf - short documentation for download
+- src/requirements.txt - all dependencies 
+- src/core.py - module handling all neccessary tasks and the exporting process
+- src/props.py - module consisting of helper objects
+- src/song.py - module with Song object representing the song
 - server.py - flask server handling requests
-- exportpdf.py - module handling all export tasks
-- props.py - module consisting of helper objects
 
 Run
 ---
@@ -33,17 +36,19 @@ Description of usage
 Song can be exported at link <pre>/export_song</pre> with parameters:
 - songnumber ... the only REQUIRED parameter - song id in database
 (The rest of parameters are optional and so has its own default value if not set)
-- resx ... X component of resolution of desired output
-- resy ... Y component of resolution of desired output
-- fileformat ... either pdf or ppt
-- songformat ... consists of numbers (representing verses) and letters 'B' or 'R' or 'C' (B for bridge and both R and C for chorus)
+- fontfamily ... <b>arial</b>, <b>times</b>, <b>opensans</b> - representing family of font to use in exported file
+- fontsize ... <b>number</b> representing size of font to use in exported file
+- background ... <b>color/url</b> representing backgournd color or image
+- maxlines ... <b>number</b> representing maximum of lines to appear at one slide
+- fileformat ... <b>pdf</b> or <b>ppt</b> for slides or <b>rawpdf</b> for just raw pdf text 
+- songformat ... <b>number</b> consists of digits (representing verses) and letters 'B' or 'R' or 'C' (B for bridge and both R and C for chorus)
 
 Example
 ---
 <pre>
 - 127.0.0.1:5000/export_song (default page of API)
 - 127.0.0.1:5000/export_song?songnumber=3 (only one parameter - the required one, specifying which song to download)
-- 127.0.0.1:5000/export_song?songnumber=7&resx=1920&resy=1080&fileformat=pdf&songformat=12BR
+- 127.0.0.1:5000/export_song?songnumber=7&fontsize=12&fontfamily=arial&fileformat=pd    f&songformat=12BR
 </pre>
 
 Operating system differences

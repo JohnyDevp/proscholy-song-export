@@ -40,7 +40,7 @@ class Song:
                     verseIndex = versesNumbers.index(verseSign)
                     buildedSong.append([verseSign, songTextInParts[verseIndex].strip()])      
         else:
-            # song has its define format 
+            # song has its defined format 
             # go through the string representing the desired song format (i.e. verses order)
             for part in self.params['songformat']:
                 try:
@@ -66,8 +66,8 @@ class Song:
 
         # first slide build
         slides.append({            
-            "song-name" : self.songName,
-            "song-id" : self.params['songnumber']
+            "title" : self.songName,
+            "sub-title" : self.params['songnumber']
         })
 
         # other slides lyrics build
@@ -76,7 +76,7 @@ class Song:
             num_of_lines = count_lines_endings(verse[1])
             if num_of_lines > max_lines:
                 # then divide the lines into two or more slides                
-                current_slide_verse = ""
+                current_slide_verse = verse[0] + ".: "
                 currently_written_lines_on_slide = 0
                 # read currently proccessed verse line by line
                 for line in str(verse[1]).splitlines():
@@ -86,8 +86,7 @@ class Song:
                     else:
                         # write out current slide
                         slides.append({
-                            "verse-sign" : verse[0],
-                            "lyrics" : current_slide_verse
+                            "content" : current_slide_verse
                         })
                         # reset counter of lines for current slide
                         currently_written_lines_on_slide = 1
@@ -98,17 +97,18 @@ class Song:
                 if currently_written_lines_on_slide != 0:
                     # write out current slide
                     slides.append({
-                        "verse-sign" : verse[0],
-                        "lyrics" : current_slide_verse
+                        "content" : current_slide_verse
                     })
             else:
                 # otherwise just create new slide with the text
                 slides.append({
-                    "verse-sign" : verse[0],
-                    "lyrics" : verse[1]
+                    "content" : verse[1]
                 })
             
         return slides
+
+    def __buildRawPdf(self, buildedSongArray):
+        ()
 
     def exportJson(self) :
         """method generating json file with text and display options
@@ -121,15 +121,23 @@ class Song:
         buildedSongArray = self.__putSongInOrder()
         
         # build slides from builded song text
-        slides = self.__buildSlidesFromBuildedSong(buildedSongArray)
+        # TODO place for decision whether to create raw pdf or presentation
+        if (self.params['fileformat'] in ['ppt', 'pdf']):
+            slides = self.__buildSlidesFromBuildedSong(buildedSongArray)
+        else: # rawpdf
+            slides = self.__buildRawPdf(buildedSongArray)
 
         #create json model
         song_data = { 
-            "data" : {
-                "song-name" : self.songName,
-                "song-id" : self.params['songnumber'],
+            "file" : {
+                "name" : self.songName,
                 "num-of-slides" : len(slides),
-                "export-format" : self.params['fileformat']
+                "export-format" : self.params['fileformat'],
+            },
+            "display-options" : {
+                "font-family" : self.params['fontfamily'],
+                'font-size' : self.params['fontsize'],
+                "background" : self.params['background']
             },
             "slides" : slides
         }

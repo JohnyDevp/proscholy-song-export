@@ -66,6 +66,23 @@ import json
 
 # print(buildedsong)
 
-with open("test.json", "r") as file:
-    string = json.loads(file.read())
-    open("out.txt", "w").write(str(string))
+import threading
+import time
+
+
+def countSeconds():
+    print("Second")
+    threading.Timer(1, countSeconds).start()
+
+def countTenSeconds():
+    print("Ten seconds passed")
+    threading.Timer(10, countTenSeconds).start()
+
+
+print("Before I'll start threads")
+threading.Timer(1, countSeconds).start()
+threading.Timer(10, countTenSeconds).start()
+
+print("Here I am after threads start...")
+g = input("Write me som input")
+print(f"You have entered: {g}")
